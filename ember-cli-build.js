@@ -2,9 +2,29 @@
 
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
+class Plugin {
+  transform(ast) {
+    this.syntax.traverse(ast, {
+      MustacheStatement(node) {
+        if (node.path.original === 'ast-transform-will-replace') {
+          let value = node.hash.pairs.find(x => x.key === 'with').value.value;
+
+          node.type = 'TextNode';
+          node.chars = value;
+        }
+      }
+    });
+  }
+}
+
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
     // Add options here
+  });
+
+  app.registry.add('htmlbars-ast-plugin', {
+    name: 'replace-ast-transform',
+    plugin: Plugin
   });
 
   /*
