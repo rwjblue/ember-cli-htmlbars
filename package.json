@@ -37,7 +37,7 @@
     "broccoli-persistent-filter": "^2.3.1",
     "hash-for-dep": "^1.5.1",
     "json-stable-stringify": "^1.0.1",
-    "strip-bom": "^3.0.0"
+    "strip-bom": "^4.0.0"
   },
   "devDependencies": {
     "@ember/optional-features": "^0.7.0",
